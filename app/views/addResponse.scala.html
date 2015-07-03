@@ -1,0 +1,54 @@
+@(fields: java.util.List[models.Field])
+
+@import     helper._
+
+@main("respone"){
+    <div class="container">
+        @if(fields != null && fields.size() > 0){
+            <form id="formResponse" action="javascript:doPost();">
+                @for(field <- fields) {
+                    @if(field.getActive){
+                        <div class="form-group">
+                            <label for=@field.label>@field.label</label>
+                            @if(field.getFieldType == FieldType.SINGLE_LINE_TEXT){
+                                <input type="text" class="form-control" id="@field.label" name="@field.getLabel" placeholder ="@field.label" >
+                            }
+                            @if(field.getFieldType == FieldType.MULTI_LINE_TEXT){
+                                <textarea  class="form-control" id="@field.label" name="@field.getLabel" placeholder ="@field.label"></textarea>
+                            }
+                            @if(field.getFieldType == FieldType.RADIO_BUTTON){
+                                @for(option <- field.options) {
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="@field.label" id="@option.getName" value="@option.getName">
+                                            @option.getName
+                                        </label>
+                                    </div>
+                                }
+                            }
+                            @if(field.getFieldType == FieldType.CHECK_BOX){
+                                @for(option <- field.options) {
+                                    <br><input type="checkbox" name="@field.getLabel" value="@option.getName">@option.getName
+                                }
+                            }
+                            @if(field.getFieldType == FieldType.COMBO_BOX){
+                                <select class="form-control" id="@field.label" name="@field.getLabel">
+                                    @for(option <- field.options) {
+                                        <option >@option.name</option>
+                                    }
+                                </select>
+                            }
+                            @if(field.getFieldType == FieldType.DATE){
+                                <input type="date" class="form-control" id="@field.label" name="@field.getLabel" placeholder ="@field.label" >
+                            }
+                        </div>
+                    }
+                }
+                <button type="submit" class="btn btn-success " >Add</button>
+            </form>
+        }
+
+    </div>
+
+    <script type="text/javascript" charset="utf-8" src="@routes.ResponseController.getAjaxJs()"></script>
+}

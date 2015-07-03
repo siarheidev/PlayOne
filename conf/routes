@@ -1,0 +1,28 @@
+
+GET         /assets/*file                                 controllers.Assets.at(path="/public", file)
+
+GET         /                                             controllers.ResponseController.newResponsePage()
+POST        /response                                     controllers.ResponseController.addResponse()
+GET         /assets.javascript.ajaxResponse.js            controllers.ResponseController.getAjaxJs()
+
+GET         /responses                                    controllers.ResponseController.listResponses()
+GET         /assets.javascript.buildTableWS.js            controllers.ResponseController.buildTableWS()
+GET         /wsResponses                                  controllers.ResponseController.wsResponses()
+
+
+GET         /assets.javascript.counterResponses.js        controllers.ResponseController.counterWS()
+GET         /newConnections                               controllers.ResponseController.newConnections()
+
+
+GET         /assets.javascript.ajaxField.js               controllers.FieldController.getAjaxJs()
+GET         /fields/:id                                   controllers.FieldController.getForm(id: Int )
+POST        /fields/addfield                              controllers.FieldController.addFieldPost()
+
+GET         /fields                                       controllers.FieldController.getFieldList
+GET         /assets.javascript.ajaxFieldDel.js            controllers.FieldController.delFieldJs()
+POST        /delfield                                     controllers.FieldController.delById()
+
+
+GET         /set/:newInt                                  controllers.TestController.setI(newInt: Int)
+GET         /get                                          controllers.TestController.getI()
+

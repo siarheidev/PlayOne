@@ -1,0 +1,36 @@
+
+@(fields: java.util.List[models.Field], listResponses: java.util.List[java.util.List[java.lang.String]])
+
+@main("Responses") {
+  <div class="container">
+    <section>
+      <h1>Responses</h1>
+
+      <table class="table table-striped table-hover table-condensed table-bordered" id="tableResponses">
+          @if(fields != null) {
+              <tr>
+                  @for(field <- fields) {
+                      <th>@field.getLabel</th>
+                  }
+              </tr>
+                  @if(listResponses != null) {
+                      @for(listResponse <- listResponses) {
+                          <tr>
+                              @for(response <- listResponse) {
+                                  @if(!response.equals("")){
+                                      <td>@response</td>
+                                  }else {
+                                      <td>N/A</td>
+                                  }
+                              }
+                          </tr>
+                      }
+                  }
+          }
+      </table>
+
+      <script type="text/javascript" charset="utf-8" src="@routes.ResponseController.buildTableWS()"></script>
+
+    </section>
+  </div>
+}
